@@ -95,12 +95,8 @@ class SlackSocket(object):
                 idle = 0
                 yield (e)
             except Queue.Empty:
-                idle += interval
+                yield (None)
             except KeyboardInterrupt:
-                done = True
-
-            if idle_timeout and idle >= idle_timeout:
-                log.info('idle timeout reached for events()')
                 done = True
 
         self.close()
