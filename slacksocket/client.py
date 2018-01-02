@@ -79,7 +79,7 @@ class SlackSocket(object):
         # return or block until we have something to return or timeout
         return self._eventq.get(timeout=timeout)
 
-    def events(self, timeout=None):
+    def events(self, idle_timeout=None):
         """
         returns a blocking generator yielding Slack event objects
         params:
