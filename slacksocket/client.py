@@ -79,7 +79,7 @@ class SlackSocket(object):
         # return or block until we have something to return or timeout
         return self._eventq.get(timeout=timeout)
 
-    def events(self, idle_timeout=None):
+    def events(self, timeout=None):
         """
         returns a blocking generator yielding Slack event objects
         params:
@@ -97,7 +97,7 @@ class SlackSocket(object):
             except Queue.Empty:
                 idle += interval
 
-                if idle_timeout and idle >= idle_timeout:
+                if timeout and idle >= timeout:
                     log.debug('idle timeout reached for events()')
                     yield (None)
             except KeyboardInterrupt:
